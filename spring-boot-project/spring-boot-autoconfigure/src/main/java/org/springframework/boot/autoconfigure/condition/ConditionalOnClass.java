@@ -43,6 +43,8 @@ import org.springframework.context.annotation.Conditional;
 @Conditional(OnClassCondition.class)
 public @interface ConditionalOnClass {
 
+	// 前置依赖条件，检查类路径下是否存在指定类,不存在就不加载到容器中
+
 	/**
 	 * The classes that must be present. Since this annotation is parsed by loading class
 	 * bytecode, it is safe to specify classes here that may ultimately not be on the

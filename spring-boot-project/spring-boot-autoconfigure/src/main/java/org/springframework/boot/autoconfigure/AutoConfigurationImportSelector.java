@@ -109,11 +109,15 @@ public class AutoConfigurationImportSelector implements DeferredImportSelector, 
 	 */
 	protected AutoConfigurationEntry getAutoConfigurationEntry(AutoConfigurationMetadata autoConfigurationMetadata,
 			AnnotationMetadata annotationMetadata) {
+		// 判断自动装配开关是否打开
 		if (!isEnabled(annotationMetadata)) {
 			return EMPTY_ENTRY;
 		}
+		// 获取 autoconfiguration 的 exclude/excludeName属性
 		AnnotationAttributes attributes = getAttributes(annotationMetadata);
+		// 获取 当前项目，涵Spring-Boot-Starter依赖项目，enableAutoConfiguration项目 下的META-INF/spring.factories 目录下所有配置类
 		List<String> configurations = getCandidateConfigurations(annotationMetadata, attributes);
+		// 移除不需要装配的文件
 		configurations = removeDuplicates(configurations);
 		Set<String> exclusions = getExclusions(annotationMetadata, attributes);
 		checkExcludedClasses(configurations, exclusions);
